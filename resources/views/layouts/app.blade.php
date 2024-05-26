@@ -19,15 +19,33 @@
     <wireui:scripts />
 </head>
 
-<body class="font-sans antialiased" x-cloak x-data="{ darkMode: $persist(false) }" :class="{ 'dark': darkMode === true }">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <x-layouts.navbar />
+<body class="font-sans antialiased bg-gray-100 text-slate-900" x-cloak x-data="{ darkMode: $persist(false) }"
+    :class="{ 'dark': darkMode === true }">
+    <x-notifications z-index="z-[100]" position="top-right" />
+    <x-dialog z-index="z-[100]" blur="sm" align="center" />
 
-        <!-- Page Content -->
-        <main>
+    <x-layouts.navbar />
+    <x-layouts.sidebar.index />
+
+    <div x-data class="min-h-screen flex flex-col justify-between pt-20 transition-all duration-200"
+        :class="$store.menu.isSidebarCollapse ? 'pl-16' : 'pl-64'">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full">
+            @stack('breadcrumbs')
+
+            <div x-data="{ open: false }">
+                <button @click="open = ! open">Toggle</button>
+
+                <div x-show="open" @click.outside="open = false">
+                    Contents...
+                </div>
+            </div>
 
             {{ $slot }}
+
         </main>
+
+        {{-- <x-layouts.footer /> --}}
+    </div>
     </div>
 
     @livewireScripts
