@@ -1,45 +1,37 @@
-<nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-    <div class="px-4 sm:px-6 lg:px-8 relative">
-        <div class="flex justify-between h-14 items-center gap-2">
-            <button x-on:click="toggleSidebar"
-                class="text-gray-600 cursor-pointer hover:text-gray-900 focus:outline-none">
-                <x-heroicon-o-bars-3-bottom-left class="w-6 h-6" />
-            </button>
+<header class="relative bg-white dark:bg-darker">
+    <div class="h-16 flex items-center justify-between p-2 md:px-6 border-b dark:border-primary-darker">
 
-            <div class="w-full flex justify-center sm:justify-start">
-                <a href="{{ route('dashboard') }}" wire:navigate>
-                    <span class="font-semibold text-xl">PACS BIOMEDIKA</span>
-                </a>
+        <a href="index.html"
+            class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light">
+            LABEL
+        </a>
+
+        <!-- Mobile sub menu button -->
+        <button @click="$store.subMobileMenu.openMobileSubMenu()"
+            class="p-2 transition-colors duration-200 rounded hover:text-primary-950 hover:bg-primary-50 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker">
+            <span class="sr-only">Open Mobile Sub Menu</span>
+            <x-icon name="user" class="w-6 h-6" />
+        </button>
+
+        <!-- Desktop Right buttons -->
+        {{-- <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
+            HALO
+        </nav> --}}
+
+        <!-- Mobile sub menu -->
+        <nav x-data x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500"
+            x-transition:enter-start="-translate-y-full opacity-0" x-transition:enter-end="translate-y-0 opacity-100"
+            x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500"
+            x-transition:leave-start="translate-y-0 opacity-100" x-transition:leave-end="-translate-y-full opacity-0"
+            x-show="$store.subMobileMenu.isMobileSubMenuOpen"
+            @click.away="$store.subMobileMenu.isMobileSubMenuOpen = false"
+            class="absolute flex items-center p-4 bg-white rounded-md shadow-lg dark:bg-darker top-16 inset-x-4 md:hidden"
+            aria-label="Secondary">
+            <div class="space-x-2">
+                MUCUL GENG
             </div>
 
-            <div class="relative">
-                <x-dropdown>
-                    <x-slot name="trigger">
-                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <button
-                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                <img class="h-8 w-8 rounded-full object-cover"
-                                    src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                            </button>
-                        @else
-                            <div
-                                class="text-white bg-gradient-to-r from-blue-500 to-violet-600 p-2 rounded-full hover:bg-primary-600 flex text-center justify-center">
-                                <x-icon name="user" class="w-5 h-5" />
-                            </div>
-                        @endif
-                    </x-slot>
-
-                    <x-dropdown.header label="{{ auth()->user()->name }}">
-                        <x-dropdown.item label="Profil" href="{{ route('profile.show') }}" />
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <x-dropdown.item separator href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                <span>Logout</span>
-                            </x-dropdown.item>
-                        </form>
-                    </x-dropdown.header>
-                </x-dropdown>
-            </div>
-        </div>
+        </nav>
     </div>
-</nav>
+
+</header>
