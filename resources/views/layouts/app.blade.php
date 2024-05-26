@@ -28,7 +28,10 @@
     <x-layouts.sidebar.index />
 
     <div x-data class="min-h-screen flex flex-col justify-between pt-20 transition-all duration-200"
-        :class="$store.menu.isSidebarCollapse ? 'pl-16' : 'pl-64'">
+        :class="[
+            $store.menu.isSidebarCollapse && 'pl-0 lg:pl-16',
+            !$store.menu.isSidebarCollapse && 'pl-0 lg:pl-64'
+        ]">
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full">
             @stack('breadcrumbs')
 

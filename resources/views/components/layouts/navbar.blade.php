@@ -2,7 +2,7 @@
     <div class="h-16 flex items-center justify-between p-2 md:px-6 border-b dark:border-primary-950">
 
         <button @click="$store.menu.toggleShowMobileMenu()"
-            class="p-2 transition-colors duration-200 rounded hover:text-primary-950 hover:bg-primary-50 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-950">
+            class="lg:hidden p-2 transition-colors duration-200 rounded hover:text-primary-950 hover:bg-primary-50 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-950">
             <span class="sr-only">Open Main Menu</span>
             <x-heroicon-o-bars-3-bottom-left class="w-6 h-6" />
         </button>
