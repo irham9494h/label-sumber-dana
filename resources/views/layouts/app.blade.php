@@ -35,20 +35,9 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full">
             @stack('breadcrumbs')
 
-            <div x-data="{ open: false }">
-                <button @click="open = ! open">Toggle</button>
-
-                <div x-show="open" @click.outside="open = false">
-                    Contents...
-                </div>
-            </div>
-
             {{ $slot }}
 
         </main>
-
-        {{-- <x-layouts.footer /> --}}
-    </div>
     </div>
 
     @livewireScripts
