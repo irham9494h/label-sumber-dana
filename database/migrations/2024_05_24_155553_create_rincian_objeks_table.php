@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RincianObjek;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rincian_objeks', function (Blueprint $table) {
+        Schema::create(RincianObjek::TABLE, function (Blueprint $table) {
             $table->id();
             $table->foreignId('objek_id')->constrained();
             $table->string('kode');
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rincian_objeks');
+        Schema::dropIfExists(RincianObjek::TABLE);
     }
 };
