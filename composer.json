@@ -12,6 +12,7 @@
         "blade-ui-kit/blade-heroicons": "^2.3",
         "davidhsianturi/blade-bootstrap-icons": "^1.5",
         "laravel/breeze": "^2.0",
+        "laravel/folio": "^1.1",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",

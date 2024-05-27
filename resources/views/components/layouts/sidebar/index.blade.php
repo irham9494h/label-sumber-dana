@@ -1,7 +1,7 @@
-<div class="h-full fixed left-0 top-16 overflow-y-auto overflow-x-hidden border-r border-gray-200 bg-white z-40 transition-all duration-300"
+<div class="h-[calc(100vh-64px)] fixed left-0 top-16 border-r border-gray-200 bg-white z-40 transition-all duration-300"
     :class="$store.menu.showMobileMenu ? 'w-64 lg:w-auto' : 'w-0 lg:w-auto'">
 
-    <div class="h-full transition-all duration-300 hover:w-64 group/sidebar-menu"
+    <div class="h-full transition-all duration-300 hover:w-64 group/sidebar-menu flex flex-col"
         :class="[
             $store.menu.isSidebarCollapse && 'w-64 lg:w-16',
             !$store.menu.isSidebarCollapse && 'w-64',
@@ -28,7 +28,7 @@
             </button>
         </div>
 
-        <div class="overflow-y-auto overflow-x-hidden">
+        <div class="overflow-y-auto overflow-x-hidden h-full">
             <ul class="">
                 <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
 
@@ -38,7 +38,15 @@
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
                 </x-layouts.sidebar.parent-menu-item>
 
+                <x-layouts.sidebar.menu-item menu="Sumber Dana" icon="heroicon-o-banknotes" />
+
+                <x-layouts.sidebar.parent-menu-item menu="Realisasi" icon="heroicon-o-clipboard-document-check">
+                    <x-layouts.sidebar.child-menu-item menu="Ermark" />
+                    <x-layouts.sidebar.child-menu-item menu="Non Ermark" />
+                </x-layouts.sidebar.parent-menu-item>
+
             </ul>
         </div>
+
     </div>
 </div>
