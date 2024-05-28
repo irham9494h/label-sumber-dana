@@ -14,4 +14,11 @@ class TahapanApbd extends Model
     protected $table = self::TABLE;
 
     protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'is_current' => 'boolean',
+        ];
+    }
 }

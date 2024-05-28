@@ -23,8 +23,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            // AkunSeeder::class,
+            TahapanApbdSeeder::class,
             SkpdSeeder::class,
+            AkunSeeder::class,
         ]);
     }
 }
