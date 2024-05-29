@@ -14,4 +14,11 @@
             </div>
         </div>
     </div>
+
+    @php
+        cache()->forever('key', 'halo');
+        $value = cache()->get('key');
+        echo $value;
+    @endphp
+
 </x-app-layout>

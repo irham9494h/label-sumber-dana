@@ -54,7 +54,8 @@ new #[Layout('layouts.guest')] class extends Component {
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-inputs.password label="Konfirmasi Password" value="I love WireUI ❤️" wire:model="password" />
+            <x-inputs.password label="Konfirmasi Password" value="I love WireUI ❤️"
+                wire:model="password_confirmation" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

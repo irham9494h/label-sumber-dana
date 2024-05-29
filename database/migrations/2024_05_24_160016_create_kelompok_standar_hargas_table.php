@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Sshs;
+use App\Models\KelompokStandarHarga;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(Sshs::TABLE, function (Blueprint $table) {
+        Schema::create(KelompokStandarHarga::TABLE, function (Blueprint $table) {
             $table->id();
             $table->string('kode');
             $table->string('nama');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(Sshs::TABLE);
+        Schema::dropIfExists(KelompokStandarHarga::TABLE);
     }
 };
