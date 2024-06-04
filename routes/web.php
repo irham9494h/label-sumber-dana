@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\HasTahun;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', HasTahun::class])
     ->name('dashboard');
 
 Route::view('profile', 'profile')

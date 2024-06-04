@@ -15,6 +15,8 @@ class Tahapan extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected function casts(): array
     {
         return [

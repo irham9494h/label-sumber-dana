@@ -1,7 +1,7 @@
 <?php
 use function Laravel\Folio\name;
 
-name('tahapan-apbd.index');
+name('jadwal.penganggaran');
 ?>
 
 <x-app-layout>
@@ -11,8 +11,10 @@ name('tahapan-apbd.index');
 
     <x-card shadow="shadow-sm" padding="px-0 py-4">
         <div class="flex justify-end px-4 pb-4 ">
-            <x-button primary href="{{ route('tahapan-apbd.form') }}" wire:navigate>Tambah Tahapan Baru</x-button>
+            <x-button primary href="{{ route('jadwal.penganggaran.form') }}" wire:navigate>Tambah Tahapan Baru</x-button>
         </div>
+
+        @livewire('counter')
 
         @if (false)
             <div class="relative overflow-x-auto">
@@ -46,7 +48,8 @@ name('tahapan-apbd.index');
             </div>
         @else
             <x-no-data title="Tidak ada data" description="Tidak ada tahapan APBD.">
-                <x-button label="Tambah Tahapan Baru" primary href="{{ route('tahapan-apbd.form') }}" wire:navigate />
+                <x-button label="Tambah Tahapan Baru" primary href="{{ route('jadwal.penganggaran.form') }}"
+                    wire:navigate />
             </x-no-data>
         @endif
     </x-card>
