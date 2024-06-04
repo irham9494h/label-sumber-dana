@@ -32,6 +32,9 @@
             <ul class="">
                 <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
 
+                <x-layouts.sidebar.menu-item menu="Tahapan APBD" icon="heroicon-o-calendar-days"
+                    url="{{ route('tahapan-apbd.index') }}" :active="request()->routeIs('tahapan-apbd.index')" />
+
                 <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->routeIs('profile')">
                     <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('ref.akun.index') }}" />
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />

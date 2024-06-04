@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TahapanApbd extends Model
+class Tahapan extends Model
 {
     use HasFactory;
 
-    const TABLE = 'tahapan_apbds';
+    const TABLE = 'tahapans';
 
     protected $table = self::TABLE;
 
@@ -18,7 +18,7 @@ class TahapanApbd extends Model
     protected function casts(): array
     {
         return [
-            'is_current' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 }

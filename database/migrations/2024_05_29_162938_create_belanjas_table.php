@@ -2,8 +2,8 @@
 
 use App\Models\Belanja;
 use App\Models\BidangUrusan;
+use App\Models\JadwalPenganggaran;
 use App\Models\SubKegiatan;
-use App\Models\TahapanApbd;
 use App\Models\UnitSkpd;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create(Belanja::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tahapan_apbd_id')->constrained()->references('id')->on(TahapanApbd::TABLE);
+            $table->foreignId('jadwal_penganggaran_id')->constrained()->references('id')->on(JadwalPenganggaran::TABLE);
             $table->foreignId('unit_skpd_id')->constrained()->references('id')->on(UnitSkpd::TABLE);
             $table->foreignId('bidang_urusan_id')->constrained()->references('id')->on(BidangUrusan::TABLE);
             $table->foreignId('sub_kegiatan_id')->constrained()->references('id')->on(SubKegiatan::TABLE);
