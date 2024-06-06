@@ -2,7 +2,7 @@
 
 use function Livewire\Volt\{state, rules, layout};
 
-layout('components.layouts.app');
+layout('layouts.guest');
 
 rules(['selectedTahun' => 'required'])->messages([
     'selectedTahun' => 'Anda belum memilih tahun APBD.',

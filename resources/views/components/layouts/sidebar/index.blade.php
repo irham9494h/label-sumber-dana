@@ -62,7 +62,7 @@
             ]">
 
             <div class="shrink-0 w-ful">
-                <x-button primary class="w-full">
+                <x-button primary class="w-full" href="{{ route('sumber-dana.upload') }}">
                     <span class="whitespace-nowrap shrink-0"> Upload Data</span>
                 </x-button>
             </div>

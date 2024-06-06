@@ -26,4 +26,8 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
         Volt::route('/list', 'jadwal/penganggaran/tabel-jadwal-penganggaran')->name('list');
         Volt::route('/form', 'jadwal/penganggaran/form-jadwal-penganggaran')->name('form');
     });
+
+    Route::prefix('sumber-dana')->name('sumber-dana.')->group(function () {
+        Volt::route('/upload', 'sumber-dana.upload-data')->name('upload');
+    });
 });
