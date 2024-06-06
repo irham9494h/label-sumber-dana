@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\HasTahun;
+use App\Livewire\SumberDana\ImportData;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -28,6 +29,6 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
     });
 
     Route::prefix('sumber-dana')->name('sumber-dana.')->group(function () {
-        Volt::route('/upload', 'sumber-dana.upload-data')->name('upload');
+        Route::get('/upload', ImportData::class)->name('upload');
     });
 });
