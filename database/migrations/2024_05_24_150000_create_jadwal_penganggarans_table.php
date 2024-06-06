@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('nama_sub_tahapan');
 
             $table->string('no_perda')->nullable();
-            $table->string('tgl_perda');
+            $table->date('tgl_perda');
 
             $table->string('no_perkada')->nullable();
-            $table->string('tgl_perkada');
+            $table->date('tgl_perkada');
 
             $table->boolean('is_locked')->default(true);
             $table->timestamps();

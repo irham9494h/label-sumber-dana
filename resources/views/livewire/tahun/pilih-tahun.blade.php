@@ -1,6 +1,8 @@
 <?php
 
-use function Livewire\Volt\{state, rules};
+use function Livewire\Volt\{state, rules, layout};
+
+layout('components.layouts.app');
 
 rules(['selectedTahun' => 'required'])->messages([
     'selectedTahun' => 'Anda belum memilih tahun APBD.',

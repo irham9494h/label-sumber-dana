@@ -33,14 +33,14 @@
 
                 <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
 
-                <x-layouts.sidebar.parent-menu-item menu="Jadwal" icon="heroicon-o-calendar-days" :active="request()->routeIs('profile')">
+                <x-layouts.sidebar.parent-menu-item menu="Jadwal" icon="heroicon-o-calendar-days" :active="request()->is('jadwal/*') ? true : false">
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
-                        url="{{ route('jadwal.penganggaran') }}" />
+                        url="{{ route('jadwal-penganggaran.list') }}" :active="request()->is('jadwal/penganggaran/*') ? true : false" />
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Update Sumber Dana" />
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->routeIs('profile')">
-                    <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('ref.akun.index') }}" />
+                    <x-layouts.sidebar.child-menu-item menu="Akun" url="#" />
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
                 </x-layouts.sidebar.parent-menu-item>

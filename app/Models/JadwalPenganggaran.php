@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class JadwalPenganggaran extends Model
 {
@@ -20,5 +21,10 @@ class JadwalPenganggaran extends Model
         return [
             'is_active' => 'boolean',
         ];
+    }
+
+    public function tahapan(): BelongsTo
+    {
+        return $this->belongsTo(Tahapan::class);
     }
 }

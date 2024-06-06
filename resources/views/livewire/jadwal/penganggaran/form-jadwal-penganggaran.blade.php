@@ -1,10 +1,18 @@
 <?php
 
 use App\Livewire\Forms\Jadwal\FormJadwalPenganggaran;
-use function Livewire\Volt\{state};
-use function Livewire\Volt\{form};
+use function Livewire\Volt\{layout, state, form, mount, uses};
+use WireUi\Traits\Actions;
+
+layout('layouts.app');
+
+uses([Actions::class]);
 
 form(FormJadwalPenganggaran::class);
+
+mount(function () {
+    $this->form->tahun = Cache::get('tahun');
+});
 
 state([
     'tahapans' => fn() => $this->form->fetchTahapan(),
@@ -12,10 +20,24 @@ state([
 
 $save = function () {
     $this->validate();
-    dd($this->form);
+
+    try {
+        DB::beginTransaction();
+        $this->form->store();
+        DB::commit();
+        $this->form->resetForm();
+        $this->notification()->success('Berhasil', 'Jadwal penganggaran SIPD tersimpan.');
+    } catch (\Throwable $th) {
+        DB::rollBack();
+        $this->notification()->error('Gagal!', 'Terjadi kesalahan saat menyimpan data.');
+    }
 };
 
 ?>
+
+@push('header')
+    <x-layouts.header title="Form Tambah Jadwal Penganggaran SIPD" />
+@endpush
 
 <div>
     <form wire:submit="save">
@@ -44,8 +66,8 @@ $save = function () {
 
             <x-slot name="footer">
                 <div class="flex items-center justify-between">
-                    <x-button type="button" label="Batal" negative outline />
-                    <x-button type="submit" label="Simpan" primary />
+                    <x-button flat secodary label="Kembali" href="{{ route('jadwal-penganggaran.list') }}" />
+                    <x-button type="submit" label="Simpan" primary spinner />
                 </div>
             </x-slot>
         </x-card>
