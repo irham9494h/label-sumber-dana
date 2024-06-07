@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\HasTahun;
+use App\Livewire\Skpd\TabelSkpd;
 use App\Livewire\SumberDana\ImportData;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -30,5 +31,9 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
 
     Route::prefix('sumber-dana')->name('sumber-dana.')->group(function () {
         Route::get('/upload', ImportData::class)->name('upload');
+    });
+
+    Route::prefix('skpd')->name('skpd.')->group(function () {
+        Route::get('/list', TabelSkpd::class)->name('list');
     });
 });

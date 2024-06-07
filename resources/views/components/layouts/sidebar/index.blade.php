@@ -40,6 +40,7 @@
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->routeIs('profile')">
+                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}" />
                     <x-layouts.sidebar.child-menu-item menu="Akun" url="#" />
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
