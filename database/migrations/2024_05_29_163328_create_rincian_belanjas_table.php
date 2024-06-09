@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('keterangan')->nullable();
             $table->string('sumber_dana')->nullable();
             $table->string('nama_penerima_bantuan')->nullable();
-            $table->double('koefisien_murni')->default(0);
+            $table->string('koefisien_murni')->default('');
             $table->double('harga_satuan_murni')->default(0);
             $table->double('total_harga_murni')->default(0);
-            $table->double('koefisien')->default(0);
+            $table->string('koefisien')->default('');
             $table->double('harga_satuan')->default(0);
             $table->double('total_harga')->default(0);
             $table->timestamps();
