@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Middleware\HasTahun;
+use App\Livewire\Referensi\Rekening\Akun\TabelAkun;
 use App\Livewire\Skpd\TabelSkpd;
-use App\Livewire\SumberDana\ImportData;
+use App\Livewire\Belanja\ImportData;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -29,11 +30,17 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
         Volt::route('/form', 'jadwal/penganggaran/form-jadwal-penganggaran')->name('form');
     });
 
-    Route::prefix('sumber-dana')->name('sumber-dana.')->group(function () {
+    Route::prefix('belanja')->name('belanja.')->group(function () {
         Route::get('/upload', ImportData::class)->name('upload');
     });
 
-    Route::prefix('skpd')->name('skpd.')->group(function () {
-        Route::get('/list', TabelSkpd::class)->name('list');
+    Route::prefix('ref')->group(function () {
+        Route::prefix('skpd')->name('skpd.')->group(function () {
+            Route::get('/list', TabelSkpd::class)->name('list');
+        });
+
+        Route::prefix('akun')->name('akun.')->group(function () {
+            Route::get('/list', TabelAkun::class)->name('list');
+        });
     });
 });

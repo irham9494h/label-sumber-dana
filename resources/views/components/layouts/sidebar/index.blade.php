@@ -39,9 +39,11 @@
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Update Sumber Dana" />
                 </x-layouts.sidebar.parent-menu-item>
 
-                <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->routeIs('profile')">
-                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}" />
-                    <x-layouts.sidebar.child-menu-item menu="Akun" url="#" />
+                <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->is('ref/*') ? true : false">
+                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}"
+                        :active="request()->is('ref/skpd/*') ? true : false" />
+                    <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('akun.list') }}"
+                        :active="request()->is('ref/akun/*') ? true : false" />
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
                 </x-layouts.sidebar.parent-menu-item>
@@ -63,7 +65,7 @@
             ]">
 
             <div class="shrink-0 w-ful">
-                <x-button primary class="w-full" href="{{ route('sumber-dana.upload') }}">
+                <x-button primary class="w-full" href="{{ route('belanja.upload') }}">
                     <span class="whitespace-nowrap shrink-0"> Upload Data</span>
                 </x-button>
             </div>
