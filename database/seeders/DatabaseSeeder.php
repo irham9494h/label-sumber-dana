@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             TahapanSeeder::class,
             SkpdSeeder::class,
             AkunSeeder::class,
-            BidangUrusanSeeder::class
+            BidangUrusanSeeder::class,
+            SumberDanaSeeder::class
         ]);
     }
 }

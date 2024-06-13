@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SumberDanas extends Model
+class SumberDana extends Model
 {
     use HasFactory;
 
@@ -14,4 +14,11 @@ class SumberDanas extends Model
     protected $table = self::TABLE;
 
     protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'set_input' => 'boolean',
+        ];
+    }
 }
