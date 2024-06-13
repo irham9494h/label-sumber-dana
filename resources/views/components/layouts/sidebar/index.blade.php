@@ -33,22 +33,21 @@
 
                 <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
 
-                <x-layouts.sidebar.parent-menu-item menu="Jadwal" icon="heroicon-o-calendar-days" :active="request()->is('jadwal/*') ? true : false">
-                    <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
-                        url="{{ route('jadwal-penganggaran.list') }}" :active="request()->is('jadwal/penganggaran/*') ? true : false" />
-                    <x-layouts.sidebar.child-menu-item menu="Jadwal Update Sumber Dana" />
-                </x-layouts.sidebar.parent-menu-item>
-
                 <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->is('ref/*') ? true : false">
-                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}"
-                        :active="request()->is('ref/skpd/*') ? true : false" />
                     <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('akun.list') }}"
                         :active="request()->is('ref/akun/*') ? true : false" />
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
+                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}"
+                        :active="request()->is('ref/skpd/*') ? true : false" />
+                    <x-layouts.sidebar.child-menu-item menu="Sumber Dana" />
                 </x-layouts.sidebar.parent-menu-item>
 
-                <x-layouts.sidebar.menu-item menu="Sumber Dana" icon="heroicon-o-banknotes" />
+                <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes" :active="request()->is('jadwal/*') ? true : false">
+                    <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
+                        url="{{ route('jadwal-penganggaran.list') }}" :active="request()->is('jadwal/penganggaran/*') ? true : false" />
+                    <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja" />
+                </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Realisasi" icon="heroicon-o-clipboard-document-check">
                     <x-layouts.sidebar.child-menu-item menu="Ermark" />
