@@ -34,23 +34,30 @@
                 <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
 
                 <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->is('ref/*') ? true : false">
-                    <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('akun.list') }}"
-                        :active="request()->is('ref/akun/*') ? true : false" />
+                    <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('ref.akun.list') }}"
+                        :active="request()->is('ref/akun*') ? true : false" />
+
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
+
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
-                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('skpd.list') }}"
-                        :active="request()->is('ref/skpd/*') ? true : false" />
-                    <x-layouts.sidebar.child-menu-item menu="Sumber Dana" />
+
+                    <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('ref.skpd.list') }}"
+                        :active="request()->is('ref/skpd*') ? true : false" />
+
+                    <x-layouts.sidebar.child-menu-item menu="Sumber Dana" url="{{ route('ref.sumber-dana.list') }}"
+                        :active="request()->is('ref/sumber-dana*') ? true : false" />
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes" :active="request()->is('penganggaran/*') ? true : false">
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
                         url="{{ route('penganggaran.jadwal.list') }}" :active="request()->is('penganggaran/jadwal*') ? true : false" />
+
                     <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja" />
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Realisasi" icon="heroicon-o-clipboard-document-check">
                     <x-layouts.sidebar.child-menu-item menu="Ermark" />
+
                     <x-layouts.sidebar.child-menu-item menu="Non Ermark" />
                 </x-layouts.sidebar.parent-menu-item>
 

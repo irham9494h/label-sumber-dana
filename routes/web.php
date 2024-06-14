@@ -31,7 +31,10 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
         Route::get('/upload', ImportData::class)->name('upload');
     });
 
-    Route::prefix('ref')->group(function () {
+    Route::prefix('ref')->name('ref.')->group(function () {
+
+        require __DIR__ . '/groups/ref/sumber-dana.php';
+
         Route::prefix('skpd')->name('skpd.')->group(function () {
             Route::get('/list', TabelSkpd::class)->name('list');
         });

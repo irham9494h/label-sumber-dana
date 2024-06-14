@@ -16,14 +16,14 @@ class SumberDanaSeeder extends Seeder
     {
         require __DIR__ . '/data/sumber-dana.php';
 
-        foreach ($dataSumberDaba as $key => $data) {
+        foreach ($sumberDanas as $key => $data) {
             $setInput = true;
 
-            if ($data['set_input'] == 'TIDAK')
+            if ($data['set_input'] == 'Tidak')
                 $setInput = false;
 
             SumberDana::create([
-                'kode' => $data['kode'],
+                'kode' => $data['kode_dana'],
                 'nama' => Str::after($data['sumber_dana'], '-'),
                 'jenis' => Str::before($data['sumber_dana'], '-'),
                 'set_input' => $setInput
