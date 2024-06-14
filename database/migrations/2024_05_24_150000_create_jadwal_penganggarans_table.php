@@ -29,6 +29,7 @@ return new class extends Migration
             $table->date('tgl_dpa');
 
             $table->boolean('is_locked')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

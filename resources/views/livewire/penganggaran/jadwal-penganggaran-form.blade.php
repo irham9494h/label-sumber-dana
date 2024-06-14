@@ -3,7 +3,7 @@
 @endpush
 
 <div>
-    <form wire:submit="create">
+    <form wire:submit="submit">
         <x-card shadow="shadow-sm">
             <div class="space-y-3">
                 <x-native-select label="Pilih Tahapan" placeholder="Pilih Tahapan APBD" :options="$tahapans"
@@ -43,7 +43,11 @@
             <x-slot name="footer">
                 <div class="flex items-center justify-between">
                     <x-button flat secodary label="Kembali" href="{{ route('penganggaran.jadwal.list') }}" />
-                    <x-button type="submit" label="Simpan" primary spinner />
+                    @if (!$jadwalId)
+                        <x-button type="submit" label="Simpan" primary spinner />
+                    @else
+                        <x-button type="submit" label="Simpan Perubahan" primary spinner />
+                    @endif
                 </div>
             </x-slot>
         </x-card>

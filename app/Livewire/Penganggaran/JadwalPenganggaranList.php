@@ -5,12 +5,16 @@ namespace App\Livewire\Penganggaran;
 use App\Livewire\LivewireComponent;
 use App\Models\JadwalPenganggaran;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
+use WireUi\Traits\Actions;
 
 use function Laravel\Prompts\select;
 
 class JadwalPenganggaranList extends LivewireComponent
 {
+    use Actions;
+
     public $tahun;
     public $showDetailModal = false;
     public $searchKeyword = '';
@@ -24,6 +28,19 @@ class JadwalPenganggaranList extends LivewireComponent
     public function setSelectedJadwal(JadwalPenganggaran $jadwalPenganggaran)
     {
         $this->selectedJadwal = $jadwalPenganggaran;
+    }
+
+    public function delete($jadwalId)
+    {
+        try {
+            DB::beginTransaction();
+            JadwalPenganggaran::find($jadwalId)->delete();
+            DB::commit();
+            $this->notification()->success('Berhasil', 'Jadwal penganggaran SIPD terhapus.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->notification()->error('Gagal!', 'Terjadi kesalahan saat menghapus data, ' . $th->getMessage());
+        }
     }
 
     #[Layout('layouts.app')]

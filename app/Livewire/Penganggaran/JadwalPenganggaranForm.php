@@ -17,9 +17,12 @@ class JadwalPenganggaranForm extends Component
 
     public $tahapans;
     public $tahun = '';
+    public $jadwalId = null;
 
-    public function mount()
+    public function mount($id = null)
     {
+        if ($id) $this->fillForm($id);
+
         $this->tahapans = Tahapan::get();
         $this->tahun = Cache::get('tahun');
     }
@@ -48,25 +51,35 @@ class JadwalPenganggaranForm extends Component
     #[Validate('required', message: 'Tanggal DPA tidak boleh kosong.')]
     public $tglDpa = '';
 
-    public function create()
+    public function submit()
     {
         $this->validate();
 
+        $data = [
+            'tahapan_id' => $this->tahapanId,
+            'tahun' => $this->tahun,
+            'nama_sub_tahapan' => $this->namaSubTahapan,
+            'no_perda' => $this->noPerda,
+            'tgl_perda' => $this->tglPerda,
+            'no_perkada' => $this->noPergub,
+            'tgl_perkada' => $this->tglPergub,
+            'tgl_rka' => $this->tglRka,
+            'tgl_dpa' => $this->tglDpa,
+        ];
+
+        if (!$this->jadwalId) {
+            $this->create($data);
+        } else {
+            $this->update($data);
+        }
+    }
+
+    public function create(array $data)
+    {
         try {
             DB::beginTransaction();
-            $created = JadwalPenganggaran::create([
-                'tahapan_id' => $this->tahapanId,
-                'tahun' => $this->tahun,
-                'nama_sub_tahapan' => $this->namaSubTahapan,
-                'no_perda' => $this->noPerda,
-                'tgl_perda' => $this->tglPerda,
-                'no_perkada' => $this->noPergub,
-                'tgl_perkada' => $this->tglPergub,
-                'tgl_rka' => $this->tglRka,
-                'tgl_dpa' => $this->tglDpa,
-            ]);
+            JadwalPenganggaran::create($data);
             DB::commit();
-
             $this->resetForm();
             $this->notification()->success('Berhasil', 'Jadwal penganggaran SIPD tersimpan.');
         } catch (\Throwable $th) {
@@ -75,10 +88,37 @@ class JadwalPenganggaranForm extends Component
         }
     }
 
+    public function update(array $data)
+    {
+        try {
+            DB::beginTransaction();
+            JadwalPenganggaran::find($this->jadwalId)->update($data);
+            DB::commit();
+            $this->notification()->success('Berhasil', 'Jadwal penganggaran SIPD diperbaharui.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->notification()->error('Gagal!', 'Terjadi kesalahan saat mengubah data, ' . $th->getMessage());
+        }
+    }
+
+    public function fillForm($jadwalId)
+    {
+        $this->jadwalId = $jadwalId;
+        $jadwal = JadwalPenganggaran::findOrFail($jadwalId);
+        if ($jadwal) {
+            $this->tahapanId = $jadwal->tahapan_id;
+            $this->namaSubTahapan = $jadwal->nama_sub_tahapan;
+            $this->noPerda = $jadwal->no_perda;
+            $this->tglPerda = $jadwal->tgl_perda;
+            $this->noPergub = $jadwal->no_perkada;
+            $this->tglPergub = $jadwal->tgl_perkada;
+            $this->tglRka = $jadwal->tgl_rka;
+            $this->tglDpa = $jadwal->tgl_dpa;
+        }
+    }
+
     public function resetForm()
     {
-        $this->tahapanId = '';
-        $this->tahun = '';
         $this->namaSubTahapan = '';
         $this->noPerda = '';
         $this->tglPerda = '';

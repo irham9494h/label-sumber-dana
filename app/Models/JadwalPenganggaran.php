@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JadwalPenganggaran extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     const TABLE = 'jadwal_penganggarans';
 

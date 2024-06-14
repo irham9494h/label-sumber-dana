@@ -71,8 +71,21 @@
                                             open = true;
                                             $wire.setSelectedJadwal({{ $jadwal->id }})
                                         }" />
-                                    <x-button.circle 2xs outline warning icon="pencil" />
-                                    <x-button.circle 2xs outline negative icon="trash" />
+                                    <x-button.circle 2xs outline warning icon="pencil"
+                                        href="{{ route('penganggaran.jadwal.form', $jadwal->id) }}" />
+                                    <x-button.circle 2xs outline negative icon="trash"
+                                        x-on:confirm="{
+                                            title: 'Yakin akan menghapus jadwal?',
+                                            'description': '[{{ $jadwal->tahapan->nama }}] - {{ $jadwal->nama_sub_tahapan }}',
+                                            accept: {
+                                                label: 'Ya, hapus',
+                                                method: 'delete',
+                                                params: {{ $jadwal->id }},
+                                            },
+                                            reject: {
+                                                label: 'Batalkan',
+                                            }
+                                        }" />
                                 </td>
                             </tr>
                         @endforeach
