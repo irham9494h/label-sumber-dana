@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('no_perkada')->nullable();
             $table->date('tgl_perkada');
 
+            $table->date('tgl_rka');
+            $table->date('tgl_dpa');
+
             $table->boolean('is_locked')->default(true);
             $table->timestamps();
         });

@@ -43,9 +43,9 @@
                     <x-layouts.sidebar.child-menu-item menu="Sumber Dana" />
                 </x-layouts.sidebar.parent-menu-item>
 
-                <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes" :active="request()->is('jadwal/*') ? true : false">
+                <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes" :active="request()->is('penganggaran/*') ? true : false">
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
-                        url="{{ route('jadwal-penganggaran.list') }}" :active="request()->is('jadwal/penganggaran/*') ? true : false" />
+                        url="{{ route('penganggaran.jadwal.list') }}" :active="request()->is('penganggaran/jadwal*') ? true : false" />
                     <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja" />
                 </x-layouts.sidebar.parent-menu-item>
 

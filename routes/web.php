@@ -25,10 +25,7 @@ Volt::route('tahun/pilih-tahun', 'tahun.pilih-tahun')->middleware(['auth', 'veri
 
 Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
 
-    Route::prefix('jadwal/penganggaran')->name('jadwal-penganggaran.')->group(function () {
-        Volt::route('/list', 'jadwal/penganggaran/tabel-jadwal-penganggaran')->name('list');
-        Volt::route('/form', 'jadwal/penganggaran/form-jadwal-penganggaran')->name('form');
-    });
+    require __DIR__ . '/groups/penganggaran.php';
 
     Route::prefix('belanja')->name('belanja.')->group(function () {
         Route::get('/upload', ImportData::class)->name('upload');
