@@ -23,8 +23,8 @@
     <div
         class="flex flex-col items-center min-h-screen px-4 pt-6 bg-gradient-to-r from-sky-400 to-blue-500 sm:justify-center sm:pt-0 dark:bg-gray-900">
         <div>
-            <a href="/" wire:navigate>
-                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+            <a href="/" wire:navigate class="text-white text-7xl">
+                <x-application-logo />
             </a>
         </div>
 
