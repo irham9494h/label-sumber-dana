@@ -52,7 +52,8 @@
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
                         url="{{ route('penganggaran.jadwal.list') }}" :active="request()->is('penganggaran/jadwal*') ? true : false" />
 
-                    <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja" />
+                    <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja"
+                        url="{{ route('penganggaran.sub-kegiatan-belanja.list') }}" :active="request()->is('penganggaran/sub-kegiatan-belanja*') ? true : false" />
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Realisasi" icon="heroicon-o-clipboard-document-check">
@@ -72,7 +73,7 @@
 
             <div class="shrink-0 w-ful">
                 <x-button primary class="w-full" href="{{ route('belanja.upload') }}">
-                    <span class="whitespace-nowrap shrink-0"> Upload Data</span>
+                    <span class="whitespace-nowrap shrink-0">Import Data Belanja</span>
                 </x-button>
             </div>
 

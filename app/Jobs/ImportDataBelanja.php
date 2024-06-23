@@ -13,6 +13,7 @@ use App\Models\Program;
 use App\Models\RincianBelanja;
 use App\Models\StandarHarga;
 use App\Models\SubKegiatan;
+use App\Models\SumberDana;
 use App\Models\UnitSkpd;
 use App\Models\Urusan;
 use Illuminate\Bus\Batchable;
@@ -117,13 +118,16 @@ class ImportDataBelanja implements ShouldQueue
                 'sub_kegiatan_id' => $subKegiatan->id,
             ]);
 
+            $sumberDana = SumberDana::where('nama', $belanja['SUMBER DANA'])
+                ->first();
+
             $rincianBelanja = RincianBelanja::create([
                 'belanja_id' => $dataBelanja->id,
                 'akun_id' => $akun->id,
                 'standar_harga_id' => $standarHarga->id,
                 'kelompok' => !empty($belanja['PAKET/KELOMPOK BELANJA']) ? str($belanja['PAKET/KELOMPOK BELANJA'])->limit(255) : '',
                 'keterangan' => !empty($belanja['KETERANGAN BELANJA']) ? str($belanja['KETERANGAN BELANJA'])->limit(255) : '',
-                'sumber_dana' => !empty($belanja['SUMBER DANA']) ? str($belanja['SUMBER DANA'])->limit(255) : '',
+                'sumber_dana_id' => $sumberDana ? $sumberDana->id : null,
                 'nama_penerima_bantuan' => !empty($belanja['NAMA PENERIMA BANTUAN']) ? str($belanja['NAMA PENERIMA BANTUAN'])->limit(255) : '',
                 'koefisien_murni' => !empty($belanja['KOEFISIEN MURNI']) ? str($belanja['KOEFISIEN MURNI'])->limit(255) : '',
                 'harga_satuan_murni' => !empty($belanja['HARGA SATUAN MURNI']) ? $belanja['HARGA SATUAN MURNI'] :  0,

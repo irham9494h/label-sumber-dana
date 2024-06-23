@@ -2,18 +2,64 @@
 
 namespace App\Livewire\Referensi\SumberDana;
 
+use App\Livewire\Forms\Referensi\SumberSana\SumberDanaForm;
 use App\Livewire\LivewireComponent;
 use App\Models\SumberDana;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
+use Livewire\WithPagination;
 
 class SumberDanaList extends LivewireComponent
 {
-    public $searchKeyword = '';
+    use WithPagination;
+
+    public SumberDanaForm $form;
+    public $showConfirmDialog = false;
 
     public function mount(): void
     {
         $this->perPage = 20;
+    }
+
+    public function updatedSearchKeyword()
+    {
+        $this->resetPage();
+    }
+
+    public function save()
+    {
+        try {
+            DB::beginTransaction();
+            $this->form->store();
+            DB::commit();
+            $this->notification()->success('Berhasil', 'Sumber dana tersimpan.');
+            $this->form->reset();
+            $this->form->formSumberDana = false;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->notification()->error('Gagal!', 'Terjadi kesalahan saat menyimpan data, ' . $th->getMessage());
+        }
+    }
+
+    public function edit($sumberDana)
+    {
+        $this->form->jenis = $sumberDana['jenis'];
+        $this->form->kode = $sumberDana['kode'];
+        $this->form->nama = $sumberDana['nama'];
+        $this->form->selectedId = $sumberDana['id'];
+        $this->form->formAction = 'UPDATE';
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->dialog()->confirm([
+            'title' => 'Konfimasi Layani Antrian Nomor ?',
+            'icon' => 'warning',
+            'method' => 'delete',
+            'rejectLabel' => 'Batalkan',
+            'acceptLabel' => 'Konfirmasi',
+            'params' => $id,
+        ]);
     }
 
     public function delete($id)
@@ -34,6 +80,7 @@ class SumberDanaList extends LivewireComponent
     {
         $sumberDanas = SumberDana::query()
             ->onlySetInput()
+            ->search($this->searchKeyword)
             ->orderBy('kode')
             ->paginate($this->perPage);
         return view('livewire.referensi.sumber-dana.sumber-dana-list', [

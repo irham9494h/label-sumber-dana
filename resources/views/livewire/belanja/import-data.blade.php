@@ -38,7 +38,7 @@
                 <x-slot name="footer">
                     @if (!$importing)
                         <div class="flex items-center justify-between">
-                            <x-button flat secodary label="Kembali" href="{{ route('jadwal-penganggaran.list') }}"
+                            <x-button flat secodary label="Kembali" href="{{ route('penganggaran.jadwal.list') }}"
                                 wire:loading.attr='disabled' wire:target="file,import" />
 
                             <x-button type="submit" label="Import Data" primary spinner="import"
