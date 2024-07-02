@@ -7,7 +7,8 @@
             !$store.menu.isSidebarCollapse && 'w-64',
         ]">
 
-        <div :class="$store.menu.showMobileMenu ? 'block' : 'hidden lg:block'" class="transition-all duration-300 h-max">
+        <div :class="$store.menu.showMobileMenu ? 'block' : 'hidden lg:block'"
+            class="transition-all duration-300 h-max">
             <div class="flex items-center justify-between px-5 py-2 border-b">
                 <h5 x-data class="text-sm font-semibold group-hover/sidebar-menu:block"
                     :class="$store.menu.isSidebarCollapse && 'lg:hidden'">
@@ -31,13 +32,16 @@
 
             <ul class="overflow-y-auto overflow-x-hidden soft-scrollbar h-[calc(100vh-205px)]">
 
-                <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
+                <x-layouts.sidebar.menu-item menu="Dashboard" url="{{ route('dashboard') }}"
+                    :active="request()->routeIs('dashboard')" />
 
-                <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack" :active="request()->is('ref/*') ? true : false">
+                <x-layouts.sidebar.parent-menu-item menu="Referensi" icon="heroicon-o-circle-stack"
+                    :active="request()->is('ref/*') ? true : false">
                     <x-layouts.sidebar.child-menu-item menu="Akun" url="{{ route('ref.akun.list') }}"
                         :active="request()->is('ref/akun*') ? true : false" />
 
-                    <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" />
+                    <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" url="{{ route('ref.bidang-urusan.list') }}"
+                        :active="request()->is('ref/bidang-urusan*') ? true : false" />
 
                     <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
 
@@ -48,12 +52,15 @@
                         :active="request()->is('ref/sumber-dana*') ? true : false" />
                 </x-layouts.sidebar.parent-menu-item>
 
-                <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes" :active="request()->is('penganggaran/*') ? true : false">
+                <x-layouts.sidebar.parent-menu-item menu="Penganggaran" icon="heroicon-o-banknotes"
+                    :active="request()->is('penganggaran/*') ? true : false">
                     <x-layouts.sidebar.child-menu-item menu="Jadwal Penganggaran"
-                        url="{{ route('penganggaran.jadwal.list') }}" :active="request()->is('penganggaran/jadwal*') ? true : false" />
+                        url="{{ route('penganggaran.jadwal.list') }}"
+                        :active="request()->is('penganggaran/jadwal*') ? true : false" />
 
                     <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja"
-                        url="{{ route('penganggaran.sub-kegiatan-belanja.list') }}" :active="request()->is('penganggaran/sub-kegiatan-belanja*') ? true : false" />
+                        url="{{ route('penganggaran.sub-kegiatan-belanja.list') }}"
+                        :active="request()->is('penganggaran/sub-kegiatan-belanja*') ? true : false" />
                 </x-layouts.sidebar.parent-menu-item>
 
                 <x-layouts.sidebar.parent-menu-item menu="Realisasi" icon="heroicon-o-clipboard-document-check">

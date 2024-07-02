@@ -3,6 +3,7 @@
 use App\Http\Middleware\HasTahun;
 use App\Livewire\Belanja\ImportData;
 use App\Livewire\Referensi\Akun\AkunList;
+use App\Livewire\Referensi\BidangUrusan\BidangUrusanList;
 use App\Livewire\Skpd\SkpdList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -41,6 +42,10 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
 
         Route::prefix('akun')->name('akun.')->group(function () {
             Route::get('/list', AkunList::class)->name('list');
+        });
+
+        Route::prefix('bidang-urusan')->name('bidang-urusan.')->group(function () {
+            Route::get('/list', BidangUrusanList::class)->name('list');
         });
     });
 });
