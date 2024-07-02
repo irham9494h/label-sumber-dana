@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,4 +23,12 @@ class AkunRekening extends Model
     protected $guarded = [];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function scopeSearch(Builder $query, string $keyword): void
+    {
+        $query->when($keyword, function ($query) use ($keyword) {
+            $query->where('kode', $keyword)
+                ->orWhere('nama', 'like', '%' . $keyword . '%');
+        });
+    }
 }
