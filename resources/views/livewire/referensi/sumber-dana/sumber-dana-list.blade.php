@@ -147,4 +147,3 @@
     </x-modal>
 
 </div>
-{{-- <div wire:loading wire:target="delete"> --}}

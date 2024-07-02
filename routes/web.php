@@ -2,8 +2,8 @@
 
 use App\Http\Middleware\HasTahun;
 use App\Livewire\Referensi\Rekening\Akun\TabelAkun;
-use App\Livewire\Skpd\TabelSkpd;
 use App\Livewire\Belanja\ImportData;
+use App\Livewire\Skpd\SkpdList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
         require __DIR__ . '/groups/ref/sumber-dana.php';
 
         Route::prefix('skpd')->name('skpd.')->group(function () {
-            Route::get('/list', TabelSkpd::class)->name('list');
+            Route::get('/list', SkpdList::class)->name('list');
         });
 
         Route::prefix('akun')->name('akun.')->group(function () {

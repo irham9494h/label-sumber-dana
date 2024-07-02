@@ -16,11 +16,6 @@ class SumberDanaList extends LivewireComponent
     public SumberDanaForm $form;
     public $showConfirmDialog = false;
 
-    public function mount(): void
-    {
-        $this->perPage = 20;
-    }
-
     public function updatedSearchKeyword()
     {
         $this->resetPage();

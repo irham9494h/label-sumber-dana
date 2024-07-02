@@ -9,6 +9,6 @@ class LivewireComponent extends Component
 {
     use Actions;
 
-    public $perPage = 10;
+    public $perPage = 20;
     public $searchKeyword = '';
 }
