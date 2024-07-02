@@ -50,24 +50,13 @@ class SumberDanaList extends LivewireComponent
         $this->form->formAction = 'UPDATE';
     }
 
-    public function confirmDelete($id)
-    {
-        $this->dialog()->confirm([
-            'title' => 'Konfimasi Layani Antrian Nomor ?',
-            'icon' => 'warning',
-            'method' => 'delete',
-            'rejectLabel' => 'Batalkan',
-            'acceptLabel' => 'Konfirmasi',
-            'params' => $id,
-        ]);
-    }
-
     public function delete($id)
     {
         try {
             DB::beginTransaction();
             SumberDana::find($id)->delete();
             DB::commit();
+            $this->showConfirmDialog = false;
             $this->notification()->success('Berhasil', 'Sumber dana terhapus.');
         } catch (\Throwable $th) {
             DB::rollBack();
