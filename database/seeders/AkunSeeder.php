@@ -16,45 +16,32 @@ class AkunSeeder extends Seeder
         require __DIR__ . '/data/akun.php';
 
         foreach ($dataAkun as $key => $data) {
+
+            $kode_akun = "";
+            $jenis_akun = "";
+
+            if ($data['akun'] && $data['kelompok'] && $data['jenis'] && $data['objek'] && $data['rincian_objek'] && $data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'] . '.' . $data['rincian_objek'] . '.' . $data['sub_rincian_objek'];
+                $jenis_akun = AkunRekening::SUB_RINCIAN_OBJEK;
+            } else if ($data['akun'] && $data['kelompok'] && $data['jenis'] && $data['objek'] && $data['rincian_objek'] && !$data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'] . '.' . $data['rincian_objek'];
+                $jenis_akun = AkunRekening::RINCIAN_OBJEK;
+            } else if ($data['akun'] && $data['kelompok'] && $data['jenis'] && $data['objek'] && !$data['rincian_objek'] && !$data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'];
+                $jenis_akun = AkunRekening::OBJEK;
+            } else if ($data['akun'] && $data['kelompok'] && $data['jenis'] && !$data['objek'] && !$data['rincian_objek'] && !$data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'];
+                $jenis_akun = AkunRekening::JENIS;
+            } else if ($data['akun'] && $data['kelompok'] && !$data['jenis'] && !$data['objek'] && !$data['rincian_objek'] && !$data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'] . '.' . $data['kelompok'];
+                $jenis_akun = AkunRekening::KELOMPOK;
+            } else if ($data['akun'] && !$data['kelompok'] && !$data['jenis'] && !$data['objek'] && !$data['rincian_objek'] && !$data['sub_rincian_objek']) {
+                $kode_akun = $data['akun'];
+                $jenis_akun = AkunRekening::AKUN;
+            }
+
             $newAkun = AkunRekening::firstOrCreate(
-                ['kode' => $data['akun'], 'jenis_akun' => AkunRekening::AKUN],
-                ['nama' => $data['uraian']]
-            );
-
-            $newKelompok = AkunRekening::firstOrCreate(
-                ['kode' => $data['akun'] . '.' . $data['kelompok'], 'jenis_akun' => AkunRekening::KELOMPOK],
-                ['nama' => $data['uraian']]
-            );
-
-            $newJenis = AkunRekening::firstOrCreate(
-                [
-                    'kode' => $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'],
-                    'jenis_akun' => AkunRekening::JENIS
-                ],
-                ['nama' => $data['uraian']]
-            );
-
-            $newObjek = AkunRekening::firstOrCreate(
-                [
-                    'kode' => $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'],
-                    'jenis_akun' => AkunRekening::OBJEK
-                ],
-                ['nama' => $data['uraian']]
-            );
-
-            $newRincianObjek = AkunRekening::firstOrCreate(
-                [
-                    'kode' => $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'] . '.' . $data['rincian_objek'],
-                    'jenis_akun' => AkunRekening::RINCIAN_OBJEK
-                ],
-                ['nama' => $data['uraian']]
-            );
-
-            $newSubRincianObjek = AkunRekening::firstOrCreate(
-                [
-                    'kode' => $data['akun'] . '.' . $data['kelompok'] . '.' . $data['jenis'] . '.' . $data['objek'] . '.' . $data['rincian_objek'] . '.' . $data['sub_rincian_objek'],
-                    'jenis_akun' => AkunRekening::SUB_RINCIAN_OBJEK
-                ],
+                ['kode' => $kode_akun, 'jenis_akun' => $jenis_akun],
                 ['nama' => $data['uraian']]
             );
         }
