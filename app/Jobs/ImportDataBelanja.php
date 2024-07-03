@@ -70,8 +70,7 @@ class ImportDataBelanja implements ShouldQueue
                 'unit_skpd_id' => $unitSkpd->id,
             ]);
 
-
-            $program = Program::firstOrCreate(['kode' => str($belanja['KODE PROGRAM'])], [
+            $program = Program::firstOrCreate(['kode' => str($belanja['KODE PROGRAM']), 'bidang_urusan_id' => $bidangUrusan->id], [
                 'nama' => str($belanja['NAMA PROGRAM'])->limit(255),
             ]);
 

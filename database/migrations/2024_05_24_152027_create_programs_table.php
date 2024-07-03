@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BidangUrusan;
 use App\Models\Program;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,6 +15,7 @@ return new class extends Migration
     {
         Schema::create(Program::TABLE, function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bidang_urusan_id')->references('id')->on(BidangUrusan::TABLE);
             $table->string('kode');
             $table->string('nama');
             $table->timestamps();

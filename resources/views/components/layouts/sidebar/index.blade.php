@@ -43,7 +43,9 @@
                     <x-layouts.sidebar.child-menu-item menu="Bidang Urusan" url="{{ route('ref.bidang-urusan.list') }}"
                         :active="request()->is('ref/bidang-urusan*') ? true : false" />
 
-                    <x-layouts.sidebar.child-menu-item menu="Program Kegiatan" />
+                    <x-layouts.sidebar.child-menu-item menu="Program Kegiatan"
+                        url="{{ route('ref.program-kegiatan.list') }}"
+                        :active="request()->is('ref/bidang-urusan*') ? true : false" />
 
                     <x-layouts.sidebar.child-menu-item menu="SKPD" url="{{ route('ref.skpd.list') }}"
                         :active="request()->is('ref/skpd*') ? true : false" />
