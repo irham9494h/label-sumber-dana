@@ -6,6 +6,7 @@ use App\Livewire\Referensi\Akun\AkunList;
 use App\Livewire\Referensi\BidangUrusan\BidangUrusanList;
 use App\Livewire\Referensi\ProgramKegiatan\KegiatanList;
 use App\Livewire\Referensi\ProgramKegiatan\ProgramList;
+use App\Livewire\Referensi\ProgramKegiatan\SubKegiatanList;
 use App\Livewire\Skpd\SkpdList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -56,6 +57,10 @@ Route::middleware(['auth', 'verified', HasTahun::class])->group(function () {
 
         Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
             Route::get('/list', KegiatanList::class)->name('list');
+        });
+
+        Route::prefix('sub-kegiatan')->name('sub-kegiatan.')->group(function () {
+            Route::get('/list', SubKegiatanList::class)->name('list');
         });
     });
 });

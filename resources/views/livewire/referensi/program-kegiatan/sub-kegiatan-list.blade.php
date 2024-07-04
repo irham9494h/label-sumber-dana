@@ -2,6 +2,7 @@
 $currentUrusanId = null;
 $currentBidangUrusanId = null;
 $currentProgramId = null;
+$currentKegiatanId = null;
 @endphp
 
 <div x-data="{
@@ -9,9 +10,10 @@ $currentProgramId = null;
     urusanId : @entangle('urusanId'),
     bidangUrusanId : @entangle('bidangUrusanId'),
     programId : @entangle('programId'),
+    kegiatanId : @entangle('kegiatanId'),
 }">
     @push('header')
-    <x-layouts.header title="List Data Kegiatan" />
+    <x-layouts.header title="List Data Sub Kegiatan" />
     @endpush
 
     <x-card shadow="shadow-sm" padding="px-0 py-4">
@@ -61,7 +63,7 @@ $currentProgramId = null;
                 </div>
 
                 <div wire:loading.remove wire:target='bidangUrusanId'>
-                    <x-select placeholder="Pilih bidang urusan" wire:model="programId" x-model="programId"
+                    <x-select placeholder="Pilih bidang urusan" wire:model.live="programId" x-model="programId"
                         class="w-full">
                         @foreach($programs as $key => $program)
                         <x-select.option label="{{ $program->kode }} - {{ $program->nama }}"
@@ -70,13 +72,28 @@ $currentProgramId = null;
                     </x-select>
                 </div>
 
+                <div wire:loading wire:target='programId'>
+                    <span class="text-xs text-gray-400">Loading kegiatan...</span>
+                </div>
+
+                <div wire:loading.remove wire:target='programId'>
+                    <x-select placeholder="Pilih bidang urusan" wire:model="kegiatanId" x-model="kegiatanId"
+                        class="w-full">
+                        @foreach($kegiatans as $key => $kegiatan)
+                        <x-select.option label="{{ $kegiatan->kode }} - {{ $kegiatan->nama }}"
+                            value="{{ $kegiatan->id }}" />
+                        @endforeach
+                    </x-select>
+                </div>
+
                 <div class="flex justify-between items-center">
                     <x-button outline type="button" wire:click="resetFIlter" wire:loading.attr="disabled"
-                        x-bind:disabled="!urusanId || !bidangUrusanId || !programId">
+                        x-bind:disabled="!urusanId || !bidangUrusanId || !programId || !kegiatanId">
                         Reset
                     </x-button>
 
-                    <x-button primary type="submit" x-bind:disabled="!urusanId || !bidangUrusanId || !programId"
+                    <x-button primary type="submit"
+                        x-bind:disabled="!urusanId || !bidangUrusanId || !programId || !kegiatanId"
                         wire:loading.attr="disabled" spinner="applyFilter">
                         Filter
                     </x-button>
@@ -84,7 +101,7 @@ $currentProgramId = null;
             </form>
         </div>
 
-        @if (count($kegiatans) > 0)
+        @if (count($subKegiatans) > 0)
 
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right">
@@ -94,7 +111,7 @@ $currentProgramId = null;
                             <span class="sr-only">No</span>
                         </th>
                         <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">
-                            Kegiatan
+                            SUb Kegiatan
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -102,62 +119,66 @@ $currentProgramId = null;
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($kegiatans as $key => $kegiatan)
+                    @foreach ($subKegiatans as $key => $subKegiatan)
 
                     {{-- Show Urusan --}}
-                    @if($kegiatan->program->bidangUrusan->urusan_id != $currentUrusanId)
+                    @if($subKegiatan->kegiatan->program->bidangUrusan->urusan_id != $currentUrusanId)
                     <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
-                        <td class="px-6 py-2 whitespace-nowrap">
-                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap"></td>
                         <td class="px-6 py-2 whitespace-nowrap font-semibold" colspan="2">
-                            [URUSAN] {{ $kegiatan->program->bidangUrusan->urusan->kode}} {{
-                            $kegiatan->program->bidangUrusan->urusan->nama}}
+                            [URUSAN] {{ $subKegiatan->kegiatan->program->bidangUrusan->urusan->kode}} {{
+                            $subKegiatan->kegiatan->program->bidangUrusan->urusan->nama}}
                         </td>
                     </tr>
 
-                    @php
-                    $currentUrusanId = $kegiatan->program->bidangUrusan->urusan->id;
-                    @endphp
+                    @php $currentUrusanId = $subKegiatan->kegiatan->program->bidangUrusan->urusan->id; @endphp
                     @endif
 
                     {{-- Show Bidang Urusan --}}
-                    @if($kegiatan->program->bidangUrusan->id != $currentBidangUrusanId)
+                    @if($subKegiatan->kegiatan->program->bidangUrusan->id != $currentBidangUrusanId)
                     <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
-                        <td class="px-6 py-2 whitespace-nowrap">
-                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap"></td>
                         <td class="px-6 py-2 whitespace-nowrap font-semibold" colspan="2">
-                            [BIDANG URUSAN] {{ $kegiatan->program->bidangUrusan->kode}} {{
-                            $kegiatan->program->bidangUrusan->nama}}
+                            [BIDANG URUSAN] {{ $subKegiatan->kegiatan->program->bidangUrusan->kode}} {{
+                            $subKegiatan->kegiatan->program->bidangUrusan->nama}}
                         </td>
                     </tr>
 
-                    @php
-                    $currentBidangUrusanId = $kegiatan->program->bidangUrusan->id;
-                    @endphp
+                    @php $currentBidangUrusanId = $subKegiatan->kegiatan->program->bidangUrusan->id; @endphp
                     @endif
 
                     {{-- Show Program --}}
-                    @if($kegiatan->program_id != $currentProgramId)
+                    @if($subKegiatan->kegiatan->program_id != $currentProgramId)
                     <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
-                        <td class="px-6 py-2 whitespace-nowrap">
-                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap"></td>
                         <td class="px-6 py-2 whitespace-nowrap font-semibold" colspan="2">
-                            [PROGRAM] {{ $kegiatan->program->kode}} {{
-                            $kegiatan->program->nama}}
+                            [PROGRAM] {{ $subKegiatan->kegiatan->program->kode}} {{
+                            $subKegiatan->kegiatan->program->nama}}
                         </td>
                     </tr>
 
-                    @php
-                    $currentProgramId = $kegiatan->program_id;
-                    @endphp
+                    @php $currentProgramId = $subKegiatan->kegiatan->program_id; @endphp
+                    @endif
+
+                    {{-- Show Kegiatan --}}
+                    @if($subKegiatan->kegiatan_id != $currentKegiatanId)
+                    <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
+                        <td class="px-6 py-2 whitespace-nowrap"></td>
+                        <td class="px-6 py-2 whitespace-nowrap font-semibold" colspan="2">
+                            [KEGIATAN] {{ $subKegiatan->kegiatan->kode}} {{
+                            $subKegiatan->kegiatan->nama}}
+                        </td>
+                    </tr>
+
+                    @php $currentKegiatanId = $subKegiatan->kegiatan_id; @endphp
                     @endif
 
                     <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
                         <td class="px-6 py-2 whitespace-nowrap">
-                            {{ $kegiatans->firstItem() + $key }}
+                            {{ $subKegiatans->firstItem() + $key }}
                         </td>
                         <td class="px-6 py-2 whitespace-nowrap">
-                            <span class="font-semibold">{{ $kegiatan->kode }}</span> - {{ $kegiatan->nama }}
+                            <span class="font-semibold">{{ $subKegiatan->kode }}</span> - {{ $subKegiatan->nama }}
                         </td>
                         <td class="flex justify-end gap-1 px-6 py-2">
                         </td>
@@ -168,7 +189,7 @@ $currentProgramId = null;
         </div>
 
         <div class="px-4 pt-4">
-            {{ $kegiatans->onEachSide(1)->links() }}
+            {{ $subKegiatans->onEachSide(1)->links() }}
         </div>
 
         @else
