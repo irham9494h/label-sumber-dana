@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JadwalPenganggaran extends Model
@@ -31,6 +32,11 @@ class JadwalPenganggaran extends Model
         $query->when($keyword, function ($query) use ($keyword) {
             $query->where('nama_sub_tahapan', 'like', '%' . $keyword . '%');
         });
+    }
+
+    public function belanjas(): HasMany
+    {
+        return $this->hasMany(Belanja::class);
     }
 
     public function tahapan(): BelongsTo

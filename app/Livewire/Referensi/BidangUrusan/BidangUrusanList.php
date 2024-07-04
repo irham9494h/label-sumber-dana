@@ -5,7 +5,6 @@ namespace App\Livewire\Referensi\BidangUrusan;
 use App\Livewire\LivewireComponent;
 use App\Models\BidangUrusan;
 use App\Models\Urusan;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 
