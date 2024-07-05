@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Penganggaran\SubKegiantanBelanja;
+namespace App\Livewire\Penganggaran\SubKegiatanBelanja;
 
 use App\Livewire\LivewireComponent;
 use App\Models\JadwalPenganggaran;
@@ -114,7 +114,7 @@ class SubKegiatanBelanjaList extends LivewireComponent
             ]);
         }
 
-        return view('livewire.penganggaran.sub-kegiantan-belanja.sub-kegiatan-belanja-list', [
+        return view('livewire.penganggaran.sub-kegiatan-belanja.sub-kegiatan-belanja-list', [
             'belanjaSkpds' => $belanjaSkpds,
             'belanjaSkpdCascadings' => $belanjaSkpdCascadings
         ]);
