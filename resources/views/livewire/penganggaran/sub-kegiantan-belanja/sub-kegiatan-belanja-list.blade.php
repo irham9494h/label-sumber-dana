@@ -64,28 +64,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($belanjaSkpds as $key => $skpd)
+                    @foreach ($belanjaSkpdCascadings as $key => $belanja)
                     <tr class="bg-white border-b border-slate-300 hover:bg-gray-50 ">
                         <td class="px-6 py-2 whitespace-nowrap">
                             {{ $belanjaSkpds->firstItem() + $key }}
                         </td>
                         <td class="px-6 py-2 whitespace-nowrap">
                             <div class="flex flex-col">
-                                <strong>{{ $skpd->kode }}</strong>
-                                <span>{{ $skpd->nama }}</span>
+                                <strong>{{ $belanja['skpd']->kode }}</strong>
+                                <span>{{ $belanja['skpd']->nama }}</span>
                             </div>
                         </td>
-                        <td class="px-6 py-2 ">
-                            {{ $skpd->total_sub_kegiatan }}
+                        <td class="px-6 py-2 whitespace-nowrap min-w-32">
+                            {{ number_format($belanja['total_sub_kegiatan'], 0, ',', '.') }}
                         </td>
-                        <td class="px-6 py-2 ">
-                            -
+                        <td class="px-6 py-2 whitespace-nowrap min-w-32">
+                            {{ number_format($belanja['total_murni'], 2, ',', '.') }}
                         </td>
-                        <td class="px-6 py-2 ">
-                            -
+                        <td class="px-6 py-2 whitespace-nowrap min-w-32">
+                            {{ number_format($belanja['total_perubahan'], 2, '.', ',') }}
                         </td>
-                        <td class="px-6 py-2 ">
-                            -
+                        <td class="px-6 py-2 whitespace-nowrap min-w-32">
+                            {{ number_format($belanja['realisasi'], 2, ',', '.') }}
                         </td>
                         <td class="flex justify-end gap-1 px-6 py-2">
                         </td>

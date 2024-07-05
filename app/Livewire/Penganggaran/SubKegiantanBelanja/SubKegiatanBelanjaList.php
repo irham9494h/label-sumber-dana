@@ -47,8 +47,7 @@ class SubKegiatanBelanjaList extends LivewireComponent
     #[Layout('layouts.app')]
     public function render()
     {
-        // $jadwalPenganggaranId = $this->currentJadwalPenggaran->id;
-        $jadwalPenganggaranId = 1;
+        $jadwalPenganggaranId = $this->currentJadwalPenggaran->id;
         $tahun = $this->tahun;
 
         $belanjaSkpds = Skpd::query()
@@ -63,64 +62,24 @@ class SubKegiatanBelanjaList extends LivewireComponent
             ->orderBy('kode')
             ->paginate($this->perPage);
 
-        $res = [];
+        $belanjaSkpdCascadings = [];
 
         foreach ($belanjaSkpds as $key => $value) {
             $belanjaIds = $value->belanjas->select('id')->pluck('id')->toArray();
             $sumHarga = RincianBelanja::whereIn('belanja_id', $belanjaIds)->get();
 
-            array_push($res, [
+            array_push($belanjaSkpdCascadings, [
                 'skpd' => $value,
+                'total_sub_kegiatan' => count($belanjaIds),
                 'total_murni' => $sumHarga->sum('total_harga_murni'),
-                'total_perubahan' => $sumHarga->sum('total_harga')
+                'total_perubahan' => $sumHarga->sum('total_harga'),
+                'realisasi' => 0
             ]);
         }
 
-        dd($res);
-
-        // return view('livewire.penganggaran.sub-kegiantan-belanja.sub-kegiatan-belanja-list', [
-        //     'belanjaSkpds' => $belanjaSkpds,
-        // ]);
-
-
-
-        // $result = Skpd::select('skpds.id', 'skpds.kode', 'skpds.nama')
-        //     ->withCount(['unitSkpds.belanjas as belanja_count' => function ($query) use ($jadwalPenganggaranId, $tahun) {
-        //         $query->whereHas('jadwalPenganggaran', function ($query) use ($jadwalPenganggaranId, $tahun) {
-        //             $query->where('id', $jadwalPenganggaranId)
-        //                 ->where('tahun', $tahun);
-        //         });
-        //     }])
-        //     ->with(['unitSkpds.belanjas' => function ($query) use ($jadwalPenganggaranId, $tahun) {
-        //         $query->whereHas('jadwalPenganggaran', function ($query) use ($jadwalPenganggaranId, $tahun) {
-        //             $query->where('id', $jadwalPenganggaranId)
-        //                 ->where('tahun', $tahun);
-        //         });
-        //     }])
-        //     ->get()
-        //     ->map(function ($skpd) {
-        //         $belanjaIds = $skpd->unitSkpds->flatMap(function ($unitSkpd) {
-        //             return $unitSkpd->belanjas->pluck('id');
-        //         });
-
-        //         $totalMurni = DB::table('rincian_belanjas')
-        //             ->whereIn('belanja_id', $belanjaIds)
-        //             ->sum('total_murni');
-
-        //         $totalPerubahan = DB::table('rincian_belanjas')
-        //             ->whereIn('belanja_id', $belanjaIds)
-        //             ->sum('total_perubahan');
-
-        //         return [
-        //             'id' => $skpd->id,
-        //             'kode' => $skpd->kode,
-        //             'nama' => $skpd->nama,
-        //             'belanja_count' => $skpd->belanja_count,
-        //             'total_murni_sum' => $totalMurni,
-        //             'total_perubahan_sum' => $totalPerubahan,
-        //         ];
-        //     });
-
-        // dd($result);
+        return view('livewire.penganggaran.sub-kegiantan-belanja.sub-kegiatan-belanja-list', [
+            'belanjaSkpds' => $belanjaSkpds,
+            'belanjaSkpdCascadings' => $belanjaSkpdCascadings
+        ]);
     }
 }
