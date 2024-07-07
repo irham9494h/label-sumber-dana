@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Bus;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use WireUi\Traits\Actions;
+
 use Livewire\Attributes\Validate;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
 class ImportData extends Component
 {
-    use Actions;
+
     use WithFileUploads;
 
     #[Validate('required', message: 'Anda belum memilih jadwal penganggaran.')]

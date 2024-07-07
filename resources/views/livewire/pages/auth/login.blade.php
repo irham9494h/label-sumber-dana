@@ -31,12 +31,17 @@ new #[Layout('layouts.guest')] class extends Component {
     <form wire:submit="login">
         <!-- Email Address -->
         <div>
-            <x-input label="Email" wire:model="form.email" type="email" name="email" placeholder="your name" />
+            <x-mary-input label="Name" wire:model="name" />
+            {{--
+            <x-input label="Name" wire:model="form.email" type="email" name="email" placeholder="your name" /> --}}
+            {{--
+            <x-input label="Email" wire:model="form.email" type="email" name="email" placeholder="your name" /> --}}
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-inputs.password label="Password" wire:model="form.password" name="password" />
+            {{--
+            <x-inputs.password label="Password" wire:model="form.password" name="password" /> --}}
         </div>
 
         <!-- Remember Me -->
@@ -50,9 +55,7 @@ new #[Layout('layouts.guest')] class extends Component {
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-button type="submit">
-                {{ __('Log in') }}
-            </x-button>
+            <x-mary-button label="Up" tooltip="Mary" type="submit" />
         </div>
     </form>
 </div>

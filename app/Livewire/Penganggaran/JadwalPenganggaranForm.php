@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+
 
 class JadwalPenganggaranForm extends Component
 {
-    use Actions;
+
 
     public $tahapans;
     public $tahun = '';

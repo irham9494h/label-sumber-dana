@@ -16,7 +16,7 @@ class HasTahun
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Cache::has('tahun')) return redirect()->route('tahun.pilih-tahun');
+        // if (!Cache::has('tahun')) return redirect()->route('tahun.pilih-tahun');
 
         return $next($request);
     }

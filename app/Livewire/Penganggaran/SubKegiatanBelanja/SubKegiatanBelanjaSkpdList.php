@@ -5,7 +5,7 @@ namespace App\Livewire\Penganggaran\SubKegiatanBelanja;
 use App\Livewire\LivewireComponent;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
-use WireUi\Traits\Actions;
+
 
 class SubKegiatanBelanjaSkpdList extends LivewireComponent
 {

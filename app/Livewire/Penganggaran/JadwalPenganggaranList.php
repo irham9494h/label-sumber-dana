@@ -7,13 +7,13 @@ use App\Models\JadwalPenganggaran;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
-use WireUi\Traits\Actions;
+
 
 use function Laravel\Prompts\select;
 
 class JadwalPenganggaranList extends LivewireComponent
 {
-    use Actions;
+
 
     public $tahun;
     public $showDetailModal = false;

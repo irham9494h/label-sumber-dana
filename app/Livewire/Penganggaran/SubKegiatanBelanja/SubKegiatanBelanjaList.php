@@ -10,12 +10,11 @@ use App\Models\Tahapan;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Cache;
-use WireUi\Traits\Actions;
 
 class SubKegiatanBelanjaList extends LivewireComponent
 {
 
-    use WithPagination, Actions;
+    use WithPagination;
 
     public $showPilihTahapanDialog = false;
 
@@ -62,10 +61,10 @@ class SubKegiatanBelanjaList extends LivewireComponent
     public function applyFilterTahapan()
     {
         if (!$this->tahapanId || !$this->jadwalPenganggaranId) {
-            $this->notification()->error(
-                $title = 'Gagal !!!',
-                $description = 'Anda harus memilik tahapan dan jadwal penganggaran.'
-            );
+            // $this->notification()->error(
+            //     $title = 'Gagal !!!',
+            //     $description = 'Anda harus memilik tahapan dan jadwal penganggaran.'
+            // );
         } else {
             $jadwalPenganggaran = JadwalPenganggaran::query()
                 ->with('tahapan')

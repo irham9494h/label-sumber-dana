@@ -15,11 +15,11 @@
         "laravel/folio": "^1.1",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4",
-        "livewire/volt": "^1.0",
+        "livewire/livewire": "^3.5",
+        "livewire/volt": "^1.6",
+        "robsontenorio/mary": "^1.34",
         "spatie/simple-excel": "^3.6",
-        "staudenmeir/eloquent-has-many-deep": "^1.7",
-        "wireui/wireui": "^1.19"
+        "staudenmeir/eloquent-has-many-deep": "^1.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
