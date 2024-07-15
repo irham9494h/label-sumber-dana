@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SumberDana extends Model
 {
@@ -21,6 +22,11 @@ class SumberDana extends Model
         return [
             'set_input' => 'boolean',
         ];
+    }
+
+    public function rincianBelanjas(): HasMany
+    {
+        return $this->hasMany(RincianBelanja::class);
     }
 
     // SCOPE

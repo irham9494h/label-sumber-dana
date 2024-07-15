@@ -22,4 +22,9 @@ class RincianBelanja extends Model
     {
         return $this->belongsTo(Belanja::class);
     }
+
+    public function sumberDana(): BelongsTo
+    {
+        return $this->belongsTo(SumberDana::class);
+    }
 }
