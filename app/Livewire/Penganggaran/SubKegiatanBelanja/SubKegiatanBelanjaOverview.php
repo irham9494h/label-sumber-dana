@@ -27,6 +27,10 @@ class SubKegiatanBelanjaOverview extends LivewireComponent
     public $tahapanId = '';
     public $jadwalPenganggaranId = '';
 
+    public $overviewTotalSubKegiatan = 0;
+    public $overviewTotalMurni = 0;
+    public $overviewTotalPerubahan = 0;
+
     public function mount()
     {
         $this->tahun = Cache::get('tahun');
@@ -104,12 +108,16 @@ class SubKegiatanBelanjaOverview extends LivewireComponent
             ->through(function ($skpd) {
                 $total_harga_murni_sum = $skpd->rincianBelanjas->sum('total_harga_murni_sum');
                 $total_harga_sum = $skpd->rincianBelanjas->sum('total_harga_sum');
+
+                $this->overviewTotalSubKegiatan += $skpd->belanjas_count;
+                $this->overviewTotalMurni += $total_harga_murni_sum;
+                $this->overviewTotalPerubahan    += $total_harga_sum;
+
                 return [
                     'skpd' => $skpd,
                     'total_sub_kegiatan' => $skpd->belanjas_count,
                     'total_murni' => $total_harga_murni_sum,
                     'total_perubahan' => $total_harga_sum,
-                    'realisasi' => 0
                 ];
             });
 

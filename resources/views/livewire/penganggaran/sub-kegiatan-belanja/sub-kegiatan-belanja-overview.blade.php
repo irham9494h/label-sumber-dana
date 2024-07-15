@@ -75,6 +75,14 @@
         </x-card>
     </div>
 
+    <div class="mb-4">
+        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <x-stats.simple-card label="Total SUb Kegiatan" :value="$overviewTotalSubKegiatan" />
+            <x-stats.simple-card label="Total Murni" :value="number_format($overviewTotalMurni, 2, ',','.')" />
+            <x-stats.simple-card label="Total Perubahan" :value="number_format($overviewTotalPerubahan, 2, ',','.')" />
+        </div>
+    </div>
+
     <x-card shadow="shadow-sm" padding="px-0 py-4">
         <div class="flex flex-col justify-start px-4 pb-4 gap-2">
             <div class="max-w-xs w-full">
