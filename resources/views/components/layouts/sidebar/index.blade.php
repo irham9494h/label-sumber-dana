@@ -66,7 +66,7 @@
                         :active="request()->is('penganggaran/jadwal*') ? true : false" />
 
                     <x-layouts.sidebar.child-menu-item menu="Sub Kegiatan Belanja"
-                        url="{{ route('penganggaran.sub-kegiatan-belanja.list') }}"
+                        url="{{ route('penganggaran.sub-kegiatan-belanja.overview') }}"
                         :active="request()->is('penganggaran/sub-kegiatan-belanja*') ? true : false" />
                 </x-layouts.sidebar.parent-menu-item>
 

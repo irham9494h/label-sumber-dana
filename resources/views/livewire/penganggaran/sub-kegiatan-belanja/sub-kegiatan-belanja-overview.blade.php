@@ -136,7 +136,9 @@
                                             'data' => $belanja,
                                             'jadwalPenggaran' => $currentJadwalPenggaran,
                                             ], key($belanja['skpd']->id))
-                                            <x-button primary sm label="Buka Sub Kegiatan" />
+                                            <x-button primary sm label="Buka Sub Kegiatan"
+                                                href="{{ route('penganggaran.sub-kegiatan-belanja.skpd', $belanja['skpd']->id) }}"
+                                                wire:navigate />
                                         </div>
                                     </div>
                                 </div>

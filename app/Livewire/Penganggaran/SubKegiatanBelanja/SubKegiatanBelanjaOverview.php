@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Cache;
 use WireUi\Traits\Actions;
 
-class SubKegiatanBelanjaList extends LivewireComponent
+class SubKegiatanBelanjaOverview extends LivewireComponent
 {
 
     use WithPagination, Actions;
@@ -113,7 +113,7 @@ class SubKegiatanBelanjaList extends LivewireComponent
                 ];
             });
 
-        return view('livewire.penganggaran.sub-kegiatan-belanja.sub-kegiatan-belanja-list', [
+        return view('livewire.penganggaran.sub-kegiatan-belanja.sub-kegiatan-belanja-overview', [
             'belanjaSkpds' => $belanjaSkpds,
         ]);
     }
