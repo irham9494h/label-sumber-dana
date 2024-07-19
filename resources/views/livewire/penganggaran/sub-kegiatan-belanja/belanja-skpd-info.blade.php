@@ -6,10 +6,6 @@
     <x-modal.card title="{{ $belanja['skpd']->kode.' - '.$belanja['skpd']->nama }}" blur align="center" max-width="5xl"
         wire:model="showInfoDialog" x-on:close='() => showInfoDialog = false'>
 
-        <div>
-            {{-- {{ count($rincianBelanja[0]->rincianBelanjas) }} --}}
-        </div>
-
         <div class="flex-1">
             <div
                 class="grid grid-cols-1 bg-white overflow-hidden divide-y divide-gray-300 md:grid-cols-3 md:divide-y-0 md:divide-x">
@@ -42,7 +38,7 @@
 
             </div>
         </div>
-
+        @if($jadwalPenggaran)
         <div class="flex-1 mt-5">
             <div class="divide-y divide-gray-200 text-sm lg:col-span-7">
                 <div class="py-3 flex items-center justify-between hover:bg-gray-50">
@@ -86,6 +82,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <x-slot name="footer">
             <div class="flex justify-end gap-x-4">

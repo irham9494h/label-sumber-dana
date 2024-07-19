@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,6 +21,11 @@ class UnitSkpd extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function scopeWhereSkpd(Builder $query, string $skpdId): void
+    {
+        $query->where('skpd_id', $skpdId);
+    }
+
     public function skpd(): BelongsTo
     {
         return $this->belongsTo(Skpd::class);
@@ -30,8 +36,8 @@ class UnitSkpd extends Model
         return $this->hasMany(Belanja::class);
     }
 
-    // public function rincianBelanjas(): HasManyThrough
-    // {
-    //     return $this->hasManyThrough(RincianBelanja::class, Belanja::class);
-    // }
+    public function rincianBelanjas(): HasManyThrough
+    {
+        return $this->hasManyThrough(RincianBelanja::class, Belanja::class);
+    }
 }

@@ -77,7 +77,8 @@
 
     <div class="mb-4">
         <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <x-stats.simple-card label="Total SUb Kegiatan" :value="$overviewTotalSubKegiatan" />
+            <x-stats.simple-card label="Total SUb Kegiatan"
+                :value="number_format($overviewTotalSubKegiatan, 2, ',','.')" />
             <x-stats.simple-card label="Total Murni" :value="number_format($overviewTotalMurni, 2, ',','.')" />
             <x-stats.simple-card label="Total Perubahan" :value="number_format($overviewTotalPerubahan, 2, ',','.')" />
         </div>

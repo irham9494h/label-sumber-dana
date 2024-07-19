@@ -30,14 +30,14 @@ class SkpdSeeder extends Seeder
             }
 
             // Create Unit
-            $kodeUnit = str($data['unit_skpd'])->substr(0, 22);
-            $namaUnit = str($data['unit_skpd'])->substr(23);
-            if (!empty($kodeUnit)) {
-                $unit = UnitSkpd::firstOrCreate(
-                    ['kode' => $kodeUnit],
-                    ['nama' => $namaUnit, 'skpd_id' => $skpd->id]
-                );
-            }
+            // $kodeUnit = str($data['unit_skpd'])->substr(0, 22);
+            // $namaUnit = str($data['unit_skpd'])->substr(23);
+            // if (!empty($kodeUnit)) {
+            //     $unit = UnitSkpd::firstOrCreate(
+            //         ['kode' => $kodeUnit],
+            //         ['nama' => $namaUnit, 'skpd_id' => $skpd->id]
+            //     );
+            // }
         }
     }
 }

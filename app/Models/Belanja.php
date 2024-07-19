@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,5 +33,15 @@ class Belanja extends Model
     public function unitSkpd(): BelongsTo
     {
         return $this->belongsTo(UnitSkpd::class);
+    }
+
+    public function bidangUrusan(): BelongsTo
+    {
+        return $this->belongsTo(BidangUrusan::class);
+    }
+
+    public function subKegiatan(): BelongsTo
+    {
+        return $this->belongsTo(SubKegiatan::class);
     }
 }

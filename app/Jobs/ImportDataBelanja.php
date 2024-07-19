@@ -6,7 +6,6 @@ use App\Models\AkunRekening;
 use App\Models\Belanja;
 use App\Models\BidangUrusan;
 use App\Models\BidangUrusanUnitSkpd;
-use App\Models\ImportTest;
 use App\Models\Kegiatan;
 use App\Models\KelompokStandarHarga;
 use App\Models\Program;
@@ -22,10 +21,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
-use function PHPUnit\Framework\isEmpty;
 
 class ImportDataBelanja implements ShouldQueue
 {
@@ -47,9 +43,9 @@ class ImportDataBelanja implements ShouldQueue
         foreach ($this->belanjas as $key => $belanja) {
             $unitSkpd = UnitSkpd::firstOrCreate([
                 'skpd_id' => $this->skpdId,
-                'kode' => str($belanja['KODE SKPD']),
+                'kode' => str($belanja['KODE UNIT SKPD']),
             ], [
-                'nama' => str($belanja['NAMA SKPD'])->limit(255),
+                'nama' => str($belanja['NAMA UNIT SKPD'])->limit(255),
             ]);
 
             $urusan = Urusan::firstOrCreate([

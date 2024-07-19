@@ -104,7 +104,7 @@ class SubKegiatanBelanjaOverview extends LivewireComponent
                         ->groupBy('rincian_belanjas.belanja_id');
                 }
             ])
-            ->paginate(20)
+            ->paginate($this->perPage)
             ->through(function ($skpd) {
                 $total_harga_murni_sum = $skpd->rincianBelanjas->sum('total_harga_murni_sum');
                 $total_harga_sum = $skpd->rincianBelanjas->sum('total_harga_sum');

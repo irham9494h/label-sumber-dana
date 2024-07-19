@@ -31,7 +31,7 @@
             $store.menu.isSidebarCollapse && 'pl-0 lg:pl-16',
             !$store.menu.isSidebarCollapse && 'pl-0 lg:pl-64'
         ]">
-        <div>
+        <div class="w-full">
             @stack('header')
             <main class="w-full px-4 py-5 mx-auto container sm:px-6 lg:px-8">
                 {{ $slot }}
