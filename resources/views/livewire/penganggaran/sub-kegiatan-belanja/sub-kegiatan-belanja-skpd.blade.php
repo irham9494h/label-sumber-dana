@@ -87,7 +87,7 @@ $currentKegiatanId = null;
 
     <div class="mb-4">
         <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <x-stats.simple-card label="Total Sub Kegiatan" :value="number_format($totalRows, 2, ',','.')" />
+            <x-stats.simple-card label="Total Sub Kegiatan" :value="number_format($totalRows, 0, ',','.')" />
             <x-stats.simple-card label="Total Murni"
                 :value="number_format($overview->total_harga_murni_sum, 2, ',','.')" />
             <x-stats.simple-card label="Total Perubahan"
@@ -126,9 +126,6 @@ $currentKegiatanId = null;
                             </th>
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">
                                 Sumber Dana
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase">
-                                Pemilik
                             </th>
                         </tr>
                     </thead>
@@ -169,9 +166,25 @@ $currentKegiatanId = null;
                             </td>
                             <td class="pl-2 pr-6 py-2 whitespace-nowrap group">
                                 <div class="flex gap-2 items-center">
+                                    <div class="w-7 h-7">
+                                        <button x-on:click="showAction = !showAction"
+                                            class="hidden group-hover:flex p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100 ">
+                                            <span :class="{'transition duration-200': true, 'rotate-90' : showAction }">
+                                                <x-heroicon-o-chevron-right class="w-4 h-4" />
+                                            </span>
+                                        </button>
+                                    </div>
+
                                     <div class="flex flex-col transition-transform duration-200">
                                         {{ $subKegiatanBelanja->subKegiatan->kode }} - {{
                                         $subKegiatanBelanja->subKegiatan->nama }}
+
+                                        <div x-show="showAction">
+                                            <div class="flex gap-2 pt-1.5">
+                                                <x-button outline black sm label="Lihat Sub Kegiatan" wire:navigate />
+                                                <x-button primary sm label="Lihat Rincian Belanja" wire:navigate />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -180,6 +193,8 @@ $currentKegiatanId = null;
                             </td>
                             <td class="px-6 py-2 whitespace-nowrap min-w-32">
                                 {{ number_format($subKegiatanBelanja->total_harga_sum, 2, '.', ',') }}
+                            </td>
+                            <td class="px-6 py-2 whitespace-nowrap min-w-32">
                             </td>
                         </tr>
                         @endforeach

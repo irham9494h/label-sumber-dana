@@ -86,7 +86,7 @@ class SubKegiatanBelanjaSkpd extends LivewireComponent
 
         $overview =
             Belanja::query()
-            ->select(DB::raw('sum(rincian_belanjas.total_harga_murni) as total_harga_murni_sum'), DB::raw('sum(rincian_belanjas.total_harga) as total_harga_sum'))
+            ->select('belanjas.id as belanja_id', DB::raw('sum(rincian_belanjas.total_harga_murni) as total_harga_murni_sum'), DB::raw('sum(rincian_belanjas.total_harga) as total_harga_sum'))
             ->join('rincian_belanjas', 'belanjas.id', '=', 'rincian_belanjas.belanja_id')
             ->whereIn(
                 'unit_skpd_id',
