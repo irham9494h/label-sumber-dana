@@ -27,4 +27,14 @@ class RincianBelanja extends Model
     {
         return $this->belongsTo(SumberDana::class);
     }
+
+    public function standarHarga(): BelongsTo
+    {
+        return $this->belongsTo(StandarHarga::class);
+    }
+
+    public function akun(): BelongsTo
+    {
+        return $this->belongsTo(AkunRekening::class);
+    }
 }

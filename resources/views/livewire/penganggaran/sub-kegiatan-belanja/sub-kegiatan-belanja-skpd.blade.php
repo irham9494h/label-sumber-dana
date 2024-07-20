@@ -182,7 +182,9 @@ $currentKegiatanId = null;
                                         <div x-show="showAction">
                                             <div class="flex gap-2 pt-1.5">
                                                 <x-button outline black sm label="Lihat Sub Kegiatan" wire:navigate />
-                                                <x-button primary sm label="Lihat Rincian Belanja" wire:navigate />
+                                                <x-button primary sm label="Lihat Rincian Belanja"
+                                                    href="{{ route('penganggaran.sub-kegiatan-belanja.rincian', $subKegiatanBelanja->id) }}"
+                                                    wire:navigate />
                                             </div>
                                         </div>
                                     </div>
