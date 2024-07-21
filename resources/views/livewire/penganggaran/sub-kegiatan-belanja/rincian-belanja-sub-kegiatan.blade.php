@@ -48,6 +48,9 @@ $currentKegiatanId = null;
                             <th scope="col" class="w-10 pl-6 py-3" rowspan="2">
                                 <span class="sr-only">No</span>
                             </th>
+                            <th class="w-10 pl-2 py-3" rowspan="2">
+                                <x-checkbox id="md" md wire:model.defer="model" />
+                            </th>
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left uppercase"
                                 rowspan="2">
                                 <div class="sticky left-0">Uraian</div>
@@ -88,16 +91,16 @@ $currentKegiatanId = null;
                         @php $currentKelompok = $rincian->kelompok; @endphp
                         @endif
 
-                        @if($rincian->kelompok != $currentKeterangan)
+                        @if($rincian->keterangan != $currentKeterangan)
                         <x-table.row-group colspan="6" padding="pl-2 pr-6 py-2"
                             value="[-] {{ $rincian->keterangan }}" />
                         @php $currentKeterangan = $rincian->keterangan; @endphp
                         @endif
 
-                        @if($rincian->kelompok != $currentKeterangan)
+                        @if($rincian->akun->nama != $currentAkun)
                         <x-table.row-group colspan="6" padding="pl-2 pr-6 py-2"
                             value="[AKUN] {{ $rincian->akun->nama }}" />
-                        @php $currentKeterangan = $rincian->keterangan; @endphp
+                        @php $currentAkun = $rincian->akun->nama; @endphp
                         @endif
 
                         <tr x-data="{ showAction : false }" class="border-b border-slate-300"
@@ -105,9 +108,12 @@ $currentKegiatanId = null;
                             <td class="pl-6 py-2 whitespace-nowrap">
                                 {{ $rincianBelanjas->firstItem() + $key }}
                             </td>
-                            <td class="pl-2 pr-6 py-2 whitespace-nowrap group">
+                            <td class="pl-2 py-2">
+                                <x-checkbox id="md" md wire:model.defer="model" />
+                            </td>
+                            <td class="pl-2 pr-6 py-2 group">
                                 <div class="flex gap-2 items-center">
-                                    <div class="w-7 h-7">
+                                    <div class="w-8 h-7">
                                         <button x-on:click="showAction = !showAction"
                                             class="hidden group-hover:flex p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100">
                                             <span>
