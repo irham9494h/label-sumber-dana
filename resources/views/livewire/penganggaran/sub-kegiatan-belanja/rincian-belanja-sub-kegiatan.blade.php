@@ -1,6 +1,7 @@
 @php
-$currentUnitSkpdId = null;
-$currentBidangUrusanId = null;
+$currentKelompok = null;
+$currentKeterangan = null;
+$currentAkun = null;
 $currentUrusanId = null;
 $currentProgramId = null;
 $currentKegiatanId = null;
@@ -80,6 +81,23 @@ $currentKegiatanId = null;
 
                     <tbody>
                         @foreach ($rincianBelanjas as $key => $rincian)
+                        @if($rincian->kelompok != $currentKelompok)
+                        <x-table.row-group colspan="6" padding="pl-2 pr-6 py-2" value="[#] {{ $rincian->kelompok }}" />
+                        @php $currentKelompok = $rincian->kelompok; @endphp
+                        @endif
+
+                        @if($rincian->kelompok != $currentKeterangan)
+                        <x-table.row-group colspan="6" padding="pl-2 pr-6 py-2"
+                            value="[-] {{ $rincian->keterangan }}" />
+                        @php $currentKeterangan = $rincian->keterangan; @endphp
+                        @endif
+
+                        @if($rincian->kelompok != $currentKeterangan)
+                        <x-table.row-group colspan="6" padding="pl-2 pr-6 py-2"
+                            value="[AKUN] {{ $rincian->akun->nama }}" />
+                        @php $currentKeterangan = $rincian->keterangan; @endphp
+                        @endif
+
                         <tr x-data="{ showAction : false }" class="border-b border-slate-300"
                             :class="{ 'bg-white hover:bg-gray-50': ! showAction, 'bg-gray-50' : showAction }">
                             <td class="pl-6 py-2 whitespace-nowrap">
@@ -89,9 +107,9 @@ $currentKegiatanId = null;
                                 <div class="flex gap-2 items-center">
                                     <div class="w-7 h-7">
                                         <button x-on:click="showAction = !showAction"
-                                            class="hidden group-hover:flex p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100 ">
-                                            <span :class="{'transition duration-200': true, 'rotate-90' : showAction }">
-                                                <x-heroicon-o-chevron-right class="w-4 h-4" />
+                                            class="hidden group-hover:flex p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100">
+                                            <span>
+                                                <x-heroicon-o-magnifying-glass class="w-4 h-4" />
                                             </span>
                                         </button>
                                     </div>

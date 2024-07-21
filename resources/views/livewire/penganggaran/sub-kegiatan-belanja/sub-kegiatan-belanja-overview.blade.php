@@ -128,7 +128,8 @@
                             <div class="flex gap-2 items-center">
                                 <div class="w-7 h-full">
                                     <button x-on:click="showAction = !showAction"
-                                        class="hidden group-hover:flex p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100 ">
+                                        class="p-1.5 transition-colors duration-200 rounded hover:bg-primary-50 hover:border-primary-600 focus:outline-none focus:bg-primary-100"
+                                        :class="{'hidden group-hover:flex': !showAction, 'flex': showAction}">
                                         <span :class="{'transition duration-200': true, 'rotate-90' : showAction }">
                                             <x-heroicon-o-chevron-right class="w-4 h-4" />
                                         </span>
