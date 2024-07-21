@@ -3,7 +3,9 @@
 namespace App\Livewire\Penganggaran\SubKegiatanBelanja;
 
 use App\Livewire\LivewireComponent;
+use App\Models\Belanja;
 use App\Models\RincianBelanja;
+use App\Models\SubKegiatan;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 
@@ -32,7 +34,7 @@ class RincianBelanjaSubKegiatan extends LivewireComponent
             ->paginate($this->perPage);
 
         return view('livewire.penganggaran.sub-kegiatan-belanja.rincian-belanja-sub-kegiatan', [
-            'rincianBelanjas' => $rincianBelanjas
+            'rincianBelanjas' => $rincianBelanjas,
         ]);
     }
 }

@@ -16,6 +16,8 @@ $currentKegiatanId = null;
     </x-layouts.header>
     @endpush
 
+    @livewire('penganggaran.sub-kegiatan-belanja.rincian-belanja-cascading', ['belanjaId' => $belanjaId])
+
     {{-- <div class="mb-4">
         <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <x-stats.simple-card label="Total Sub Kegiatan" :value="number_format($totalRows, 0, ',','.')" />
